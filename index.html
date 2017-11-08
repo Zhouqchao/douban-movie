@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+	<meta charset="UTF-8">
+	<meta name="referrer" content="never">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>豆瓣电影</title>
+	<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+	<div class="page">
+		<main>
+			<section class="top250 active">
+				<ul class="top250-list movies">
+				</ul>
+				<div class="loading">
+					<svg class="icon" aria-hidden="true">
+					    <use xlink:href="#icon-loading"></use>
+					</svg>				
+				</div>
+			</section>
+			<section class="us movies">
+				<ul class="us-movie-list">
+					
+				</ul>
+				<div class="loading">
+					<svg class="icon" aria-hidden="true">
+					    <use xlink:href="#icon-loading"></use>
+					</svg>				
+				</div>
+			</section>
+			<section class="search">
+				<div class="search-input">
+					<input type="text" placeholder="请输入电影名,导演...">
+					<button class="search-btn">搜索</button>
+				</div>
+				<ul class="search-list movies"></ul>
+			</section>
+		</main>
+
+		<footer>
+			<div id="top250" class="active">
+				<span class="iconfont icon-top250">
+					<svg class="icon" aria-hidden="true">
+					    <use xlink:href="#icon-top250"></use>
+					</svg>				
+				</span>
+				<span class="tab-name">Top250</span>
+			</div>
+			<div id="us">
+				<span class="iconfont icon-us">
+					<svg class="icon" aria-hidden="true">
+					    <use xlink:href="#icon-us"></use>
+					</svg>
+				</span>
+				<span class="tab-name">北美</span>
+			</div>
+			<div id="search">
+				<span class="iconfont icon-search">
+					<svg class="icon" aria-hidden="true">
+					    <use xlink:href="#icon-search"></use>
+					</svg>
+				</span>
+				<span class="tab-name">搜索</span>
+			</div>
+		</footer>		
+	</div>
+
+	
+	<script src="js/jquery.min.js"></script>
+	<script src="js/iconfont.js"></script>
+	<script src="js/tabComponent.js"></script>
+	<script src="js/index.js"></script>
+</body>
+</html>
