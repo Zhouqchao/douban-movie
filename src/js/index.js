@@ -1,3 +1,7 @@
+import '../css/index.css';
+import Tab from './tabComponent.js';
+import './iconfont.js';
+import $ from './jquery.min.js';
 
 $(function(){
 
@@ -33,10 +37,10 @@ $(function(){
 											<span>${movie.collect_count}</span>收藏
 										</p>
 										<p class="pubtime-type">
-											<span class="pubtime">${movie.year}</span>
-											<span class="type">${movie.genres}</span>
+											<span class="pubtime">${movie.year} /</span>
+											<span class="type"></span>
 										</p>
-										<p class="doctor">${movie.directors[0].name}</p>
+										<p class="doctor">导演：${movie.directors[0].name}</p>
 										<p class="actor"></p>
 									</div>		
 								</a>				
@@ -85,6 +89,8 @@ $(function(){
 						actorList.push(actor.name);
 					})
 					$movieItem.find('.actor').text('主演：' + actorList.join(' / '));
+					var types = movie.genres.join(' / ');
+					$movieItem.find('.type').text(types);
 
 					_this.$top250List.append($movieItem);
 				})
@@ -131,10 +137,10 @@ $(function(){
 											<span>${movie.collect_count}</span>收藏
 										</p>
 										<p class="pubtime-type">
-											<span class="pubtime">${movie.year}</span>
-											<span class="type">${movie.genres}</span>
+											<span class="pubtime">${movie.year} /</span>
+											<span class="type"></span>
 										</p>
-										<p class="doctor">${movie.directors[0].name}</p>
+										<p class="doctor">导演：${movie.directors[0].name}</p>
 										<p class="actor"></p>
 									</div>		
 								</a>				
@@ -169,6 +175,8 @@ $(function(){
 
 					_this.$USMovieList.append($movieItem);
 					$movieItem.find('.actor').text('主演：' + actorList.join(' / '));
+					var types = movie.genres.join(' / ');
+					$movieItem.find('.type').text(types);
 					})
 				})
 			},			
@@ -191,14 +199,14 @@ $(function(){
 									<div class="movie-detail">
 										<h3 class="movie-title">${movie.title}</h3>
 										<p class="rating-collection">
-											<span class="rating">${movie.rating.average}</span>分/
-											<span>${movie.collect_count}</span>收藏
+											<span class="rating">${movie.rating.average}</span> 分 /
+											<span>${movie.collect_count}</span> 收藏
 										</p>
 										<p class="pubtime-type">
-											<span class="pubtime">${movie.year}</span>
-											<span class="type">${movie.genres}</span>
+											<span class="pubtime">${movie.year} /</span>
+											<span class="type"></span>
 										</p>
-										<p class="doctor">${movie.directors[0].name}</p>
+										<p class="doctor">导演：${movie.directors[0].name}</p>
 										<p class="actor"></p>
 									</div>	
 								</a>					
@@ -215,33 +223,67 @@ $(function(){
 					},
 					dataType:'jsonp'
 				}).done(function(res){
+					$('.loading').hide();
 					console.log(res);
 					var movies = res.subjects;
 					_this.renderSearchList(movies);
+				}).fail(function(){
+					var $noResult = $('<p></p>');
+					$noResult.text('没找到结果，请重新输入...').addClass('no-result');
+					$('.search').append($noResult);
 				})
 			},
 			renderSearchList:function(movies){
 				var _this = this;
 
 				//渲染电影列表
-				movies.forEach(function(movie){
-					var $movieItem = _this.createMovieNode(movie);
+				// movies.forEach(function(movie){
+				// 	if(movie.directors[0].name){
+				// 		continue;
+				// 	}
+				// 	var $movieItem = _this.createMovieNode(movie);
+				// 	var actorList = [];
+				// 	movie.casts.forEach(function(actor){
+				// 		actorList.push(actor.name);
+				// 	})
+				// 	$movieItem.find('.actor').text('主演：' + actorList.join(' / '));
+				// 	var types = movie.genres.join(' / ');
+				// 	$movieItem.find('.type').text(types);
+
+				// 	_this.$searchList.append($movieItem);		
+				// })
+				for(var i=0;i<movies.length;i++){
+					if(movies[i].directors.length === 0 || movies[i].casts.length === 0){
+						continue;
+					}
+					var $movieItem = _this.createMovieNode(movies[i]);
 					var actorList = [];
-					movie.casts.forEach(function(actor){
+					movies[i].casts.forEach(function(actor){
 						actorList.push(actor.name);
 					})
 					$movieItem.find('.actor').text('主演：' + actorList.join(' / '));
+					var types = movies[i].genres.join(' / ');
+					$movieItem.find('.type').text(types);
 
-					_this.$searchList.append($movieItem);
-				})
+					_this.$searchList.append($movieItem);	
+
+				}
 
 			},
 			bindEvent:function(){
 				var _this = this;
 
 				this.$searchBtn.on('click',function(){
-					var keyword = _this.$input.val();
-					_this.getSearchMovies(keyword);
+					var keyword = _this.$input.val().trim();
+					if(keyword){
+						$('.loading').show();
+						_this.getSearchMovies(keyword);
+					}
+				}),
+				this.$input.on('keyup',function(e){
+					if(e.which === 13){
+						_this.$searchBtn.trigger('click');
+					} 
 				})
 			}
 		}

@@ -17,18 +17,17 @@ ul{
 
 html{
 	height: 100%;
+	font-size: 12px;
 }
 body{
 	height: 100%;
 	font-size: 12px;
 	line-height: 1.2;
 	background-color: #fff;
-	overflow-y: scroll;
 }
 .page{
 	height: 100%;
 	position: relative;
-	/*overflow-y: scroll;*/
 }
 
 	/*main style*/
@@ -36,7 +35,13 @@ body{
 main{
 	height: calc(100% - 50px);
 	overflow-y: scroll;
-	/*-webkit-overflow-scrolling:touch;*/
+	-webkit-overflow-scrolling:touch;
+}
+main::-webkit-scrollbar {
+    width: 1em;
+}		
+main::-webkit-scrollbar-thumb{
+	background-color:transparent;
 }
 main>section{
 	display: none;
@@ -105,17 +110,23 @@ main .movies p{
 
  /*search tab style*/
 .search-input{
-    width: 80%;
-    text-align: center;
+    width: 95%;
+    display: flex;
+    justify-content: center;
     margin: 20px auto;
+    text-align: center;
     line-height: 30px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
 .search-input input{
+	width: calc(100% - 52px);
 	padding: 5px;
     outline: none;
     border: none;
     background-color: #eee;
+    border-radius: 5px;
 }
 .search-input button{
     border: none;
@@ -123,7 +134,12 @@ main .movies p{
     background: orangered;
     color: #fff;
     padding: 4px 10px;
-    margin-left: 10px;	
+    margin-left: 5px;	
+    border-radius: 5px;
+    cursor: pointer;
+}
+.search .no-result{
+	text-align: center;
 }
 
 
@@ -143,6 +159,7 @@ footer{
 footer>div{
 	flex:1;
 	text-align: center;
+	cursor: pointer;
 }
 footer>div .iconfont{
 	height:30px;
@@ -166,3 +183,4 @@ footer>div.active{
 footer>div.active .icon{
 	fill: orangered;
 }
+/*# sourceMappingURL=index.css.map*/
