@@ -33,8 +33,8 @@ $(function(){
 									<div class="movie-detail">
 										<h3 class="movie-title">${movie.title}</h3>
 										<p class="rating-collection">
-											<span class="rating">${movie.rating.average} 分 / </span>
-											<span>${movie.collect_count} 收藏</span>
+											<span class="rating">${movie.rating.average} 分</span>
+											<span> / ${movie.collect_count} 收藏</span>
 										</p>
 										<p class="pubtime-type">
 											<span class="pubtime">${movie.year} /</span>
