@@ -29,6 +29,10 @@ body{
 	height: 100%;
 	position: relative;
 }
+.page-title{
+	font-size: 12px;
+	text-indent: -9999px;
+}
 
 	/*main style*/
 
