@@ -56,7 +56,6 @@ var getDetail = (function(){
 			var filmers = movie.directors.concat(movie.casts);	
 			var _html ='';
 			filmers.forEach(function(filmer){
-				console.log(filmer);
 				if(!filmer.avatars){
 					return false;
 				}

@@ -33,8 +33,8 @@ $(function(){
 									<div class="movie-detail">
 										<h3 class="movie-title">${movie.title}</h3>
 										<p class="rating-collection">
-											<span class="rating">${movie.rating.average}</span>分/
-											<span>${movie.collect_count}</span>收藏
+											<span class="rating">${movie.rating.average} 分 / </span>
+											<span>${movie.collect_count} 收藏</span>
 										</p>
 										<p class="pubtime-type">
 											<span class="pubtime">${movie.year} /</span>
@@ -64,7 +64,6 @@ $(function(){
 					data:data,
 					dataType:'jsonp'
 				}).done(function(res){		
-					console.log(res);		
 					_this.$loading.hide();
 					var movies = res.subjects;
 					_this.renderMovieList(movies);
@@ -155,7 +154,6 @@ $(function(){
 					url:'http://api.douban.com/v2/movie/us_box',
 					dataType:'jsonp'
 				}).done(function(res){		
-					console.log(res);	
 					var movies = [];
 					res.subjects.forEach(function(ele){
 						movies.push(ele.subject);
@@ -224,7 +222,6 @@ $(function(){
 					dataType:'jsonp'
 				}).done(function(res){
 					$('.loading').hide();
-					console.log(res);
 					var movies = res.subjects;
 					_this.renderSearchList(movies);
 				}).fail(function(){
@@ -235,23 +232,9 @@ $(function(){
 			},
 			renderSearchList:function(movies){
 				var _this = this;
+				this.$searchList.empty();	
 
-				//渲染电影列表
-				// movies.forEach(function(movie){
-				// 	if(movie.directors[0].name){
-				// 		continue;
-				// 	}
-				// 	var $movieItem = _this.createMovieNode(movie);
-				// 	var actorList = [];
-				// 	movie.casts.forEach(function(actor){
-				// 		actorList.push(actor.name);
-				// 	})
-				// 	$movieItem.find('.actor').text('主演：' + actorList.join(' / '));
-				// 	var types = movie.genres.join(' / ');
-				// 	$movieItem.find('.type').text(types);
-
-				// 	_this.$searchList.append($movieItem);		
-				// })
+				//渲染电影列表 forEach方法不能使用continue，所以改用for循环
 				for(var i=0;i<movies.length;i++){
 					if(movies[i].directors.length === 0 || movies[i].casts.length === 0){
 						continue;

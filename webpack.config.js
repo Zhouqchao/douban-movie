@@ -48,7 +48,8 @@ module.exports = {
 			minify:{
 				removeComments:true,
 				collapseInlineTagWhitespace:true,
-				minifyCSS:true
+				minifyCSS:true,
+				collapseWhitespace:true
 			},
 			chunks:['index']
 		}),
@@ -59,7 +60,8 @@ module.exports = {
 			minify:{
 				removeComments:true,
 				collapseInlineTagWhitespace:true,
-				minifyCSS:true
+				minifyCSS:true,
+				collapseWhitespace:true
 			},
 			chunks:['detail']
 		}),
@@ -70,7 +72,8 @@ module.exports = {
 			minify:{
 				removeComments:true,
 				collapseInlineTagWhitespace:true,
-				minifyCSS:true
+				minifyCSS:true,
+				collapseWhitespace:true
 			},
 			chunks:['filmer']
 		}),
